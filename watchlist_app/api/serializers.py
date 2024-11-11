@@ -3,10 +3,15 @@ from watchlist_app.models import Movie
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    len_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Movie
         fields = "__all__"  # ["id", "name", "description"]
         # exclude = ["active"]
+
+    def get_len_name(self, object):
+        return len(object.name)
 
     # Type 1: Field Leval Validator
     def validate_name(self, value):
