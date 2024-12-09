@@ -20,6 +20,6 @@ urlpatterns = [
     path(
         "stream/<int:pk>",
         StreamPlatformDetailAV.as_view(),
-        name="streamplatformdetail-list",
+        name="streamplatform-detail",
     ),
 ]

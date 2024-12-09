@@ -49,7 +49,9 @@ class WatchDetailAV(APIView):
 class StreamPlatformListAV(APIView):
     def get(self, request):
         platform = StreamPlatform.objects.all()
-        serializer = StreamPlatformSerializer(platform, many=True)
+        serializer = StreamPlatformSerializer(
+            platform, many=True, context={"request": request}
+        )
         return Response(serializer.data)
 
     def post(self, request):
@@ -65,7 +67,9 @@ class StreamPlatformDetailAV(APIView):
     def get(self, request, pk):
         try:
             platform = StreamPlatform.objects.get(pk=pk)
-            serializer = StreamPlatformSerializer(platform)
+            serializer = StreamPlatformSerializer(
+                platform, context={"request": request}
+            )
             return Response(serializer.data)
         except WatchList.DoesNotExist:
             return Response(
